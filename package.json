@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Apply SourceMap to code execution in vite-node",
   "type": "module",
-  "main": "/dist/index.mjs",
-  "types": "/dist/index.d.ts",
+  "main": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "rimraf dist && rollup -c",
     "check": "tsc",
