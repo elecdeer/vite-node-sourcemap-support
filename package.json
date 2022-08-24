@@ -1,6 +1,6 @@
 {
   "name": "vite-node-sourcemap-support",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Apply SourceMap to code execution in vite-node",
   "type": "module",
   "main": "./dist/index.mjs",
