@@ -5,11 +5,6 @@ import type { FetchResult } from "vite-node";
 //https://github.com/vitest-dev/vitest/blob/88d5764894f62449540209567df19926e46a91f3/packages/vite-node/src/client.ts#L298
 //外部パッケージはここで呼ばれないみたいなので、中からdictを渡す
 
-declare global {
-  // eslint-disable-next-line no-var
-  var sourceMapDict: Map<string, { timestamp: number; result: FetchResult }>;
-}
-
 let _prepareStackTrace: typeof Error.prepareStackTrace | null = null;
 
 export const install = (

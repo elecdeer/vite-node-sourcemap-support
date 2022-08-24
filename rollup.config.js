@@ -27,13 +27,13 @@ const plugins = [
   }),
 ];
 
-const entries = ["src/index.ts"];
-
 export default defineConfig([
   {
-    input: entries,
+    input: "src/index.ts",
     output: {
       file: "dist/index.mjs",
+      // dir: "dist",
+      // entryFileNames: "[name].mjs",
       format: "esm",
       sourcemap: true,
     },
@@ -41,9 +41,14 @@ export default defineConfig([
     plugins: plugins,
   },
   {
-    input: entries,
+    input: {
+      index: "src/index.ts",
+      global: "src/global.d.ts",
+    },
     output: {
-      file: "dist/index.d.ts",
+      // file: "dist/index.d.ts",
+      dir: "dist",
+      entryFileNames: "[name].d.ts",
       format: "esm",
     },
     external: external,
