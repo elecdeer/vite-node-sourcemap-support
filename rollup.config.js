@@ -1,8 +1,9 @@
 import { builtinModules } from "module";
 import { defineConfig } from "rollup";
-import commonjs from "@rollup/plugin-commonjs";
 import esbuild from "rollup-plugin-esbuild";
-import json from "@rollup/plugin-json";
+// import commonjs from "@rollup/plugin-commonjs";
+// import json from "@rollup/plugin-json";
+// import { nodeResolve } from "@rollup/plugin-node-resolve";
 import dts from "rollup-plugin-dts";
 
 import pkg from "./package.json";
@@ -11,11 +12,16 @@ const external = [
   ...builtinModules,
   ...Object.keys(pkg.dependencies || {}),
   // ...Object.keys(pkg.peerDependencies || {}),
+  "vite-node/server",
+  "vite-node/client",
 ];
 
 const plugins = [
-  json(),
-  commonjs(), //要らないかも
+  // nodeResolve({
+  //   preferBuiltins: true,
+  // }),
+  // json(),
+  // commonjs(),
   esbuild({
     target: "node16",
   }),
@@ -41,6 +47,10 @@ export default defineConfig([
       format: "esm",
     },
     external: external,
-    plugins: [dts({})],
+    plugins: [
+      dts({
+        // respectExternal: true,
+      }),
+    ],
   },
 ]);
