@@ -1,0 +1,29 @@
+{
+  "name": "vite-node-sourcemap-support",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elecdeer/vite-node-sourcemap-support.git"
+  },
+  "author": "elecdeer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/elecdeer/vite-node-sourcemap-support/issues"
+  },
+  "homepage": "https://github.com/elecdeer/vite-node-sourcemap-support#readme",
+  "devDependencies": {
+    "@tsconfig/node18-strictest-esm": "^1.0.1",
+    "@types/node": "^18.7.12",
+    "@typescript-eslint/eslint-plugin": "^5.34.0",
+    "@typescript-eslint/parser": "^5.34.0",
+    "eslint": "^8.22.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "typescript": "^4.7.4"
+  }
+}
