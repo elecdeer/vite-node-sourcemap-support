@@ -20,7 +20,9 @@ export const install = (
     const dictResolved = sourceMapDict();
     Error.prepareStackTrace = prepareStackTrace(dictResolved);
   } catch (e) {
-    console.error("failed to install sourcemap support");
+    console.warn(
+      "[vite-node-sourcemap-support] failed to install sourcemap support"
+    );
     // console.error(e);
   }
 };
