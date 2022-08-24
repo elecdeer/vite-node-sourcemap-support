@@ -13,10 +13,16 @@ declare global {
 let _prepareStackTrace: typeof Error.prepareStackTrace | null = null;
 
 export const install = (
-  sourceMapDict: Map<string, { timestamp: number; result: FetchResult }>
+  sourceMapDict: () => Map<string, { timestamp: number; result: FetchResult }>
 ) => {
   _prepareStackTrace = Error.prepareStackTrace;
-  Error.prepareStackTrace = prepareStackTrace(sourceMapDict);
+  try {
+    const dictResolved = sourceMapDict();
+    Error.prepareStackTrace = prepareStackTrace(dictResolved);
+  } catch (e) {
+    console.error("failed to install sourcemap support");
+    // console.error(e);
+  }
 };
 
 export const uninstall = () => {
