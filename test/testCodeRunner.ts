@@ -1,7 +1,7 @@
 import { createServer } from "vite";
 import type { ViteNodeRunnerOptions } from "vite-node";
 import { ViteNodeServer } from "vite-node/server";
-import { SourcemapContextualizedRunner } from "../src";
+import { install, uninstall } from "../src";
 import { ViteNodeRunner } from "vite-node/client";
 
 export const runInViteNode =
@@ -36,13 +36,16 @@ export const runInViteNode =
         return node.resolveId(id, importer);
       },
     };
-    const runner = contextualizeMap
-      ? new SourcemapContextualizedRunner(node, runnerOptions)
-      : new ViteNodeRunner(runnerOptions);
+    const runner = new ViteNodeRunner(runnerOptions);
+
+    if (contextualizeMap) {
+      install(node);
+    }
 
     try {
       await runner.executeFile(executeFile);
     } finally {
+      uninstall();
       await server.close();
     }
   };

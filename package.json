@@ -1,6 +1,6 @@
 {
   "name": "vite-node-sourcemap-support",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Apply SourceMap to code execution in vite-node",
   "type": "module",
   "main": "./dist/index.mjs",
@@ -9,6 +9,7 @@
   "scripts": {
     "build": "rimraf dist && rollup -c",
     "check": "tsc",
+    "test": "vitest",
     "prepare": "npm run build"
   },
   "files": [

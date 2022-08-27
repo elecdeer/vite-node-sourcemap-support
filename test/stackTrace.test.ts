@@ -20,7 +20,6 @@ describe("stackTrace", () => {
       await runner();
     } catch (e: unknown) {
       const stack = (e as Error).stack;
-      // console.log(stack);
       expect(stack).not.toMatch(/testCode.ts:18:20/);
     }
   });
@@ -31,8 +30,8 @@ describe("stackTrace", () => {
       await runner();
     } catch (e: unknown) {
       const stack = (e as Error).stack;
-      // console.log(stack);
-      expect(stack).toMatch(/testCode.ts:18:20/);
+      console.log(stack);
+      expect(stack).toMatch(/testCode.ts:13:18/);
     }
   });
 });

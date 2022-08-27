@@ -1,40 +1,7 @@
 import { SourceMapConsumer } from "source-map-js";
 import type { FetchResult } from "vite-node";
 
-//厳密ではsourceMapDictはグローバル変数では無く、即時関数の引数の形で与えられる
-//https://github.com/vitest-dev/vitest/blob/88d5764894f62449540209567df19926e46a91f3/packages/vite-node/src/client.ts#L298
-//外部パッケージはここで呼ばれないみたいなので、中からdictを渡す
-
-declare global {
-  // eslint-disable-next-line no-var
-  var sourceMapDict: Map<string, { timestamp: number; result: FetchResult }>;
-}
-
-let _prepareStackTrace: typeof Error.prepareStackTrace | null = null;
-
-export const install = (
-  sourceMapDict: () => Map<string, { timestamp: number; result: FetchResult }>
-) => {
-  _prepareStackTrace = Error.prepareStackTrace;
-  try {
-    const dictResolved = sourceMapDict();
-    Error.prepareStackTrace = prepareStackTrace(dictResolved);
-  } catch (e) {
-    console.warn(
-      "[vite-node-sourcemap-support] failed to install sourcemap support"
-    );
-    // console.error(e);
-  }
-};
-
-export const uninstall = () => {
-  if (_prepareStackTrace === null) {
-    return;
-  }
-  Error.prepareStackTrace = _prepareStackTrace;
-};
-
-const prepareStackTrace =
+export const prepareStackTrace =
   (sourceMapDict: Map<string, { timestamp: number; result: FetchResult }>) =>
   (err: Error, stackTraces: NodeJS.CallSite[]) => {
     if (err.stack === undefined) {
@@ -42,8 +9,6 @@ const prepareStackTrace =
     }
     let stackStr = err.stack;
     stackTraces.forEach((stack) => {
-      // console.log("stack");
-      // console.log(stack.toString());
       const file = stack.getFileName();
       const line = stack.getLineNumber();
       const column = stack.getColumnNumber();

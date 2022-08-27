@@ -1,2 +1,1 @@
-export { install, uninstall } from "./hookStackTrace";
-export { SourcemapContextualizedRunner } from "./sourcemapContextualizedRunner";
+export { install, uninstall } from "./install";
